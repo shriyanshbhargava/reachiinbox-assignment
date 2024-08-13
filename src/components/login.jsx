@@ -9,7 +9,7 @@ const Login = () => {
         <h3 className="text-xl pb-4 font-sans">Create a new account</h3>
         <Link
           to={
-            "https://hiring.reachinbox.xyz/api/v1/auth/google-login?redirect_to=https://reachininbox-assignment/home"
+            "https://hiring.reachinbox.xyz/api/v1/auth/google-login?redirect_to=https://reachininbox-assignment.vercal.app/home"
           }
         >
           <button className="border border-gray-500 py-3 px-20 flex justify-center items-center text-base rounded-md">
