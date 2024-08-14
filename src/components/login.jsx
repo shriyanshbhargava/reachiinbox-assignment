@@ -30,7 +30,7 @@ const Login = () => {
           <div className="border main-content border-[#888a8e] w-[450px] rounded-2xl bg-[#111112] pt-5 pb-10 ">
             <p className="text-3xl pt-3">Create a new account</p>
             <Link
-              to={`https://hiring.reachinbox.xyz/api/v1/auth/google-login?redirect_to=https://reachiinbox-assignment.vercel.app/onebox`}
+              to={`https://hiring.reachinbox.xyz/api/v1/auth/google-login?redirect_to=${window.location.origin}/onebox`}
             >
               <button
                 onClick={() => loginWithRedirect()}
