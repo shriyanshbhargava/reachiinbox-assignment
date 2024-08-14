@@ -1,3 +1,4 @@
+
 import "../App.css";
 import { useContext } from "react";
 import { themeContext } from "../context";
@@ -15,7 +16,6 @@ const Onebox = () => {
         <div>
           <Navbar />
         </div>
-
         <div
           style={{ background: darkMode ? "white" : "black" }}
           className="bg-black index-page-height flex justify-start"

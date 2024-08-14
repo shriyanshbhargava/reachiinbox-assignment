@@ -7,8 +7,8 @@ const MainRoutes = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Index />} />
-        <Route path="/onebox" element={<Onebox />} />
+        <Route path="/index" element={<Index />} />
+        <Route path="/mailbox" element={<Onebox />} />
       </Routes>
     </>
   );

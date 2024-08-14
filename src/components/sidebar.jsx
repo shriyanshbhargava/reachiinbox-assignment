@@ -35,7 +35,7 @@ const Sidebar = () => {
 
         <div className=" pt-10 h-[600px]">
           <div className="flex items-center justify-start flex-col gap-7  h-[500px]">
-            <Link to="/">
+            <Link to="/index">
               {" "}
               <img src={home} alt="home logo" />
             </Link>
@@ -44,7 +44,7 @@ const Sidebar = () => {
             <img src={email} alt="email-logo" />
             <img src={send} alt="send-logo" />
             <img src={menu} alt="menu-logo" />
-            <Link to="/onebox">
+            <Link to="/mailbox">
               <span className="bg-white">
                 <FaInbox className="text-[#a2a2ac] text-[20px]" />
               </span>
@@ -57,6 +57,7 @@ const Sidebar = () => {
             className=" rounded-full   text-white flex items-center justify-center relative cursor-pointer"
             onClick={handleShow}
           >
+            <p className="p-1">{user.name.split(" ").map((word) => word[0])}</p>
             {show && (
               <div className="absolute border-[#4f4f51] border h-[100px] w-[100px] -top-[100px] left-[48px] rounded-lg ">
                 <button

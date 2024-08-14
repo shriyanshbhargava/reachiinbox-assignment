@@ -1,19 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "../App.css";
 import logo from "../assests/Logo.svg";
 import googleLogo from "../assests/google-logo.svg";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Login = () => {
-  const { loginWithRedirect, isAuthenticated } = useAuth0();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate("/onebox");
-    }
-  }, [isAuthenticated, navigate]);
+  const { loginWithRedirect } = useAuth0();
+  const handleLogin = () => {};
   return (
     <>
       <main className="h-100vh bg-black text-white">
@@ -30,12 +24,11 @@ const Login = () => {
           <div className="border main-content border-[#888a8e] w-[450px] rounded-2xl bg-[#111112] pt-5 pb-10 ">
             <p className="text-3xl pt-3">Create a new account</p>
             <Link
-              to={`https://hiring.reachinbox.xyz/api/v1/auth/google-login?redirect_to=${window.location.origin}/onebox`}
+              to={
+                "https://hiring.reachinbox.xyz/api/v1/auth/google-login?redirect_to=https://reachiinbox-assignment.vercel.app/index"
+              }
             >
-              <button
-                onClick={() => loginWithRedirect()}
-                className="border border-[#888a8e] pt-3 pb-3 pr-24 pl-24 mt-10 rounded-md "
-              >
+              <button className="border border-[#888a8e] pt-3 pb-3 pr-24 pl-24 mt-10 rounded-md ">
                 <div className="flex items-center justify-center gap-3">
                   <img src={googleLogo} alt="google-logo" />
                   Sign Up with Google
@@ -52,7 +45,10 @@ const Login = () => {
             </button>
             <p className="mt-5 text-[#888a8e] ">
               Already an account?
-              <span className="text-white cursor-pointer"> Sign In</span>
+              <span className="text-white cursor-pointer" onClick={handleLogin}>
+                {" "}
+                Sign In
+              </span>
             </p>
           </div>
         </div>
