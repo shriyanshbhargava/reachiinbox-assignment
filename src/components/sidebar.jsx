@@ -1,82 +1,63 @@
-import logo from "../assests/emailLogo.svg";
-import home from "../assests/Home.svg";
-import contact from "../assests/contact.svg";
-import email from "../assests/email.svg";
-import menu from "../assests/menu.svg";
-import emailStore from "../assests/email store.svg";
-import chart from "../assests/bar_chart.svg";
-import send from "../assests/send.svg";
-import { Link } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
-import { useContext, useState } from "react";
-import { themeContext } from "../context";
+import React from "react";
+import { SiGmail } from "react-icons/si";
+import { GoHomeFill } from "react-icons/go";
+import { IoIosSend } from "react-icons/io";
+import { IoMail } from "react-icons/io5";
+import { RiUserSearchFill } from "react-icons/ri";
+import { FaThList } from "react-icons/fa";
 import { FaInbox } from "react-icons/fa";
+import { RiBarChartFill } from "react-icons/ri";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const Sidebar = () => {
-  const theme = useContext(themeContext);
-  const darkMode = theme.state.darkMode;
-  const { user } = useAuth0();
-  const { logout } = useAuth0();
-  const [show, setShow] = useState(false);
-  const handleShow = () => {
-    setShow(!show);
-  };
+const sidebar = () => {
+  const theme = useSelector((store)=> store.theme)
+  const textColor = theme === "dark" ? "text-black" : "text-white"
+  const bgColor = theme === "dark" ? "bg-gray-900" : "bg-[#FAFAFA]"
+  const borderClr = theme === "dark" ? "border-gray-700" : "border-[#DEDEDE]"
+
   return (
-    <div className="flex">
-      <main
-        className="h-[100vh] w-14 p-3   bg-[#101113]"
-        style={{ background: darkMode ? "white" : "#101113" }}
-      >
-        <div className=" pb-5  h-[50px] flex items-center justify-center">
-          <div>
-            <img src={logo} alt="logo" className=" object-cover" />
-          </div>
-        </div>
-
-        <div className=" pt-10 h-[600px]">
-          <div className="flex items-center justify-start flex-col gap-7  h-[500px]">
-            <Link to="/index">
-              {" "}
-              <img src={home} alt="home logo" />
-            </Link>
-
-            <img src={contact} alt="contact-logo" />
-            <img src={email} alt="email-logo" />
-            <img src={send} alt="send-logo" />
-            <img src={menu} alt="menu-logo" />
-            <Link to="/mailbox">
-              <span className="bg-white">
-                <FaInbox className="text-[#a2a2ac] text-[20px]" />
-              </span>
-            </Link>
-            <img src={chart} alt="chart-logo" />
-          </div>
-        </div>
-        <div className="mt-5  rounded-full  bg-[#054F31]">
-          <div
-            className=" rounded-full   text-white flex items-center justify-center relative cursor-pointer"
-            onClick={handleShow}
-          >
-            <p className="p-1">{user.name.split(" ").map((word) => word[0])}</p>
-            {show && (
-              <div className="absolute border-[#4f4f51] border h-[100px] w-[100px] -top-[100px] left-[48px] rounded-lg ">
-                <button
-                  className="border-[#4f4f51] border-2 pr-3 pl-3 pt-1 pb-1 rounded-lg bg-[#23272C] mt-10 "
-                  onClick={() =>
-                    logout({
-                      logoutParams: { returnTo: window.location.origin },
-                    })
-                  }
-                >
-                  Logout
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
-      </main>
+    <div className={`${bgColor} flex flex-col min-h-screen w-15 p-3 border-r ${borderClr}`}>
+      <div className={`${(theme === "dark" ? "bg-white" : "bg-black")} py-1 px-0.5 rounded flex justify-center items-center text-xl mt-1 ${textColor}`}>
+        <SiGmail />
+      </div>
+      <div className="text-2xl mt-24 mb-2">
+      <Link to="/home">
+        <GoHomeFill
+          
+          className="hover:bg-gray-700 hover:p-1 rounded text-gray-400"
+        />
+        </Link>
+        <RiUserSearchFill
+          
+          className="mt-12 hover:bg-gray-700 hover:p-1 rounded text-gray-400"
+        />
+        <IoMail
+          
+          className="mt-12 hover:bg-gray-700 hover:p-1 rounded text-gray-400"
+        />
+        <IoIosSend
+          
+          className="mt-12 hover:bg-gray-700 hover:p-1 rounded text-gray-400"
+        />
+        <FaThList
+          
+          className="mt-12 hover:bg-gray-700 hover:p-1 rounded text-gray-400"
+        />
+        <Link to="/mail">
+        <FaInbox
+          
+          className="mt-12 hover:bg-gray-700 hover:p-1 rounded text-gray-400"
+        />
+        </Link>
+        <RiBarChartFill
+          
+          className="mt-12 hover:bg-gray-700 hover:p-1 rounded text-gray-400"
+        />
+      </div>
+        <div className="text-white text-xl bg-green-900 rounded-full flex justify-center items-center h-9 w-9 mt-36 font-sans">AS</div>
     </div>
   );
 };
 
-export default Sidebar;
+export default sidebar;
