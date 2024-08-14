@@ -1,35 +1,69 @@
-import React from "react";
-import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import "../App.css";
+import logo from "../assests/Logo.svg";
+import googleLogo from "../assests/google-logo.svg";
+import { useAuth0 } from "@auth0/auth0-react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const { loginWithRedirect, isAuthenticated } = useAuth0();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/onebox");
+    }
+  }, [isAuthenticated, navigate]);
   return (
-    <div className="border border-gray-700 w-[460px] rounded-xl h-[312px] flex flex-col items-center text-white bg-gray-850">
-      <div className=" flex flex-col py-6 justify-center items-center">
-        <h3 className="text-xl pb-4 font-sans">Create a new account</h3>
-        <Link
-          to={
-            "https://hiring.reachinbox.xyz/api/v1/auth/google-login?redirect_to=https://reachiinbox-assignment.vercel.app/home"
-          }
-        >
-          <button className="border border-gray-500 py-3 px-20 flex justify-center items-center text-base rounded-md">
-            <FcGoogle className="text-2xl font-sans" />{" "}
-            <span className="ml-2 font-sans">Sign Up with Google</span>
-          </button>
-        </Link>
-      </div>
-      <div className="pt-7">
-        <Link>
-          <button className="bg-gradient-to-r from-blue-500 rounded to-blue-800 text-white w-48 py-3 px-6 font-sans">
-            Create an Account
-          </button>
-        </Link>
-      </div>
-      <div className="flex pt-7 pb-5">
-        <p className="text-gray-600 font-sans">Already have an account?</p>
-        <span className="ml-1 text-gray-300 font-sans">Sign In</span>
-      </div>
-    </div>
+    <>
+      <main className="h-100vh bg-black text-white">
+        <nav>
+          <div className="header h-[36px] flex justify-center items-center pt-3 pb-3 ">
+            <div>
+              <img src={logo} alt="Logo" className="w-full object-cover" />
+            </div>
+          </div>
+        </nav>
+        <hr style={{ border: ".5px solid rgba(128, 128, 128, 0.2)" }} />
+
+        <div className="main relative bg-black">
+          <div className="border main-content border-[#888a8e] w-[450px] rounded-2xl bg-[#111112] pt-5 pb-10 ">
+            <p className="text-3xl pt-3">Create a new account</p>
+            <Link
+              to={`https://hiring.reachinbox.xyz/api/v1/auth/google-login?redirect_to=${window.location.origin}/onebox`}
+            >
+              <button
+                onClick={() => loginWithRedirect()}
+                className="border border-[#888a8e] pt-3 pb-3 pr-24 pl-24 mt-10 rounded-md "
+              >
+                <div className="flex items-center justify-center gap-3">
+                  <img src={googleLogo} alt="google-logo" />
+                  Sign Up with Google
+                </div>
+              </button>
+            </Link>
+
+            <br />
+            <button
+              className="pt-3 pb-3 pr-8 pl-8 mt-10 rounded-lg btn"
+              onClick={() => loginWithRedirect()}
+            >
+              Create an Account
+            </button>
+            <p className="mt-5 text-[#888a8e] ">
+              Already an account?
+              <span className="text-white cursor-pointer"> Sign In</span>
+            </p>
+          </div>
+        </div>
+        <hr style={{ border: ".5px solid rgba(128, 128, 128, 0.2)" }} />
+        <footer>
+          <div className="h-[40px] flex items-center justify-center text-[#888a8e] ">
+            <p>© 2023 Reachinbox. All rights reserved.</p>
+          </div>
+        </footer>
+      </main>
+    </>
   );
 };
 

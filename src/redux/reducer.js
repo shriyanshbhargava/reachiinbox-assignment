@@ -1,51 +1,38 @@
-import { ADD_THREAD_REPLY, CHANGE_THEME, CURRENT_THREAD, CURRENT_THREAD_DATA, DELETE_THREAD, GET_DATA, GET_TOKEN } from "./actiontype"
+import {
+  LOGINFAILURE,
+  LOGINREQ,
+  LOGINSUCCESS,
+  THREADIDFAIL,
+  THREADIDREQ,
+  THREADIDSUCCESS,
+} from "./actionTypes";
 
-const initState = {
-    theme: "dark",
-    listmail:[],
-    curThreadId:null,
-    curThreadData:[],
-    token:null
-}
+const initialState = {
+  isAuth: false,
+  isLoading: false,
+  loading: false,
+  data: [],
+  threadData: [],
+  isError: false,
+};
 
-export const Reducer = (state= initState, {type,payload})=>{
-    switch(type){
-        case CHANGE_THEME: 
-            return {
-                ...state,
-                theme:payload
-            }
-        case GET_TOKEN:
-            return{
-                ...state,
-                token:payload
-            }
-        case GET_DATA:
-            return{
-                ...state,
-                listmail: payload
-            }
-        case CURRENT_THREAD:
-            return{
-                ...state,
-                curThreadId: payload
-            }
-        case CURRENT_THREAD_DATA:
-            return{
-                ...state,
-                curThreadData: payload
-            }
-        case DELETE_THREAD:
-            return{
-                ...state,
-                curThreadData: [],
-                curThreadId: null,
-            }
-        case ADD_THREAD_REPLY:
-          return{
-            ...state,
-            curThreadData: [...state.curThreadData, payload]
-          }
-        default: return state
-    }
-}
+const reducer = (state = initialState, { type, payload }) => {
+  switch (type) {
+    case LOGINREQ:
+      return { ...state, isLoading: false };
+
+    case LOGINSUCCESS:
+      return { ...state, isLoading: false, data: payload };
+    case LOGINFAILURE:
+      return { ...state, isError: true };
+    case THREADIDREQ:
+      return { ...state, Loading: true };
+    case THREADIDSUCCESS:
+      return { ...state, Loading: false, threadData: payload };
+    case THREADIDFAIL:
+      return { ...state, isError: true };
+    default:
+      return state;
+  }
+};
+export default reducer;
